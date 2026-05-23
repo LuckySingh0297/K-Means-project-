@@ -1,119 +1,211 @@
-# Airline-Clustering-using-KMeans-Unsupervised-Learning-
-Built a KMeans clustering model to segment airlines based on passenger traffic and flight frequency. Performed EDA, outlier removal, and cluster evaluation using Silhouette Score, Calinski-Harabasz, and Davies-Bouldin metrics. Identified optimal clusters and generated actionable insights on airline operations.
-# 🚀 Airline Clustering using KMeans
+# ✈️ K-Means Clustering Project – Airline Passenger Analysis
 
-## 📌 Overview
-This project applies K-Means Clustering (Unsupervised Learning) to analyze airline traffic data and group airlines based on operational scale using passenger count and number of flights.
+## 📌 Project Overview
 
-The main goal is to identify patterns in airline operations and segment them into meaningful clusters.
+This project uses the **K-Means Clustering Algorithm** to analyze airline passenger and flight data.
+The goal is to identify patterns among airlines based on:
 
----
+* Number of flights held
+* Total passengers
+* Airline traffic behavior
+* Similar airline groups (clusters)
 
-## 📂 Dataset
-- Source: Air Traffic Passenger Statistics
-- Features used:
-  - Operating Airline
-  - Passenger Count
-  - Flights held (derived)
+This project demonstrates:
 
----
-
-## 🧠 Problem Statement
-Airlines operate at different scales — some handle massive traffic while others operate at a smaller level.
-
-This project aims to:
-- Segment airlines into clusters
-- Identify high vs low traffic airlines
-- Detect outliers affecting clustering
+* Data preprocessing
+* Exploratory Data Analysis (EDA)
+* Elbow Method
+* K-Means Clustering
+* Cluster visualization
+* Business insights generation
 
 ---
 
-## ⚙️ Tech Stack
-- Python
-- Pandas
-- Matplotlib
-- Scikit-learn
-- SQLAlchemy
-- Kneedle
+# 📂 Dataset
+
+The dataset contains airline operational statistics including:
+
+* Airline Name
+* Flights Held
+* Passenger Count
+* Operational Metrics
 
 ---
 
-## 🔍 Project Workflow
+# 🛠️ Technologies Used
 
-### 1. Data Collection & Storage
-- Loaded dataset using Pandas
-- Stored data into MySQL database
-
-### 2. Data Preprocessing
-- Checked missing values and duplicates
-- Selected relevant features
-- Aggregated:
-  - Total passengers per airline
-  - Total flights per airline
-
-### 3. Outlier Detection
-- Used scatter plot visualization
-- Identified extreme outliers:
-  - United Airlines
-  - United Airlines (Pre-2013)
-- Removed outliers to improve clustering performance
-
-### 4. Finding Optimal Clusters
-
-Elbow Method:
-- Plotted Inertia vs Number of Clusters
-- No clear elbow detected (gradual decrease)
-
-Silhouette Score:
-- Evaluated K from 2 to 8
-- Best K = 2
+* Python
+* Pandas
+* NumPy
+* Matplotlib
+* Seaborn
+* Scikit-Learn
 
 ---
 
-## 🤖 Model Building
-Applied KMeans clustering:
+# 📊 Visualizations
 
-KMeans(n_clusters=2)
+## 1️⃣ Airline Flights vs Passengers Scatter Plot
 
----
+This visualization shows the relationship between:
 
-## 📈 Model Evaluation
-- Silhouette Score → Measures cluster separation
-- Calinski-Harabasz Index → Higher is better
-- Davies-Bouldin Index → Lower is better
+* Flights held by airlines
+* Number of passengers
 
----
+It helps identify:
 
-## 📊 Results
-The model segmented airlines into 2 clusters:
+* High traffic airlines
+* Outliers
+* Airline operational scale
 
-- Cluster 0: Low traffic airlines (fewer flights & passengers)
-- Cluster 1: High traffic airlines (large-scale operations)
+![Airline Scatter Plot](Images/01_airlines_scatter_plot.png)
 
----
+### 🔍 Insights
 
-## 💾 Outputs
-- Clustered dataset: Air.csv
-- Trained model: Clust_.pkl
+* United Airlines handled the highest number of passengers.
+* Some airlines operate fewer flights but still manage large passenger volumes.
+* Smaller airlines are densely packed near the lower-left region.
+* A few airlines act as major outliers because of very large operational scale.
 
 ---
 
-## 📌 Key Insights
-- Clear separation between small and large airlines
-- Outliers significantly affect clustering
-- KMeans works well after preprocessing
+## 2️⃣ Elbow Method (Within Sum of Squares)
+
+The Elbow Method helps determine the optimal number of clusters for K-Means.
+
+![Elbow Method Red](Images/02_elbow_method_red.png)
+
+### 🔍 Insights
+
+* WSS decreases rapidly from K=2 to K=5.
+* After K=5, improvement becomes smaller.
+* This indicates diminishing returns after 5 clusters.
+* K=5 appears to be the optimal cluster count.
 
 ---
 
-## ⚠️ Limitations
-- No feature scaling applied
-- Limited features used
-- GEO Region not used
+## 3️⃣ Inertia Curve
+
+This graph shows how inertia changes with different cluster values.
+
+![Inertia Curve](Images/03_inertia_curve.png)
+
+### 🔍 Insights
+
+* Inertia continuously decreases as clusters increase.
+* The curve starts flattening near K=5.
+* This supports the selection of 5 clusters.
 
 ---
 
-## 🔥 Future Improvements
-- Apply StandardScaler
-- Use more features
-- Try DBSCAN and Hierarchical Clustering
-- Improve visualization using PCA
+## 4️⃣ Optimal Cluster Selection
+
+The red dashed line highlights the selected optimal cluster count.
+
+![Optimal K](Images/04_elbow_method_optimal_k.png)
+
+### 🔍 Insights
+
+* The optimal number of clusters is selected as K=5.
+* K=5 provides a balance between:
+
+  * Low inertia
+  * Better segmentation
+  * Avoiding overfitting
+
+---
+
+# 🤖 Machine Learning Workflow
+
+## Step 1: Data Collection
+
+* Imported airline passenger dataset.
+
+## Step 2: Data Cleaning
+
+* Checked missing values
+* Removed inconsistencies
+* Selected important numerical features
+
+## Step 3: Exploratory Data Analysis
+
+* Scatter plots
+* Distribution analysis
+* Outlier identification
+
+## Step 4: Feature Scaling
+
+* Standardized data before clustering.
+
+## Step 5: Elbow Method
+
+* Determined optimal K value.
+
+## Step 6: K-Means Clustering
+
+* Trained clustering model.
+* Grouped airlines into clusters.
+
+## Step 7: Visualization
+
+* Visualized clusters and model performance.
+
+---
+
+# 📈 Business Insights
+
+* Airlines can be segmented into different operational categories.
+* Large airlines dominate passenger traffic.
+* Mid-size airlines form separate behavioral groups.
+* Clustering helps identify:
+
+  * Market leaders
+  * Medium-scale competitors
+  * Small operational airlines
+
+---
+
+# 🚀 Future Improvements
+
+* Apply PCA for dimensionality reduction.
+* Compare with Hierarchical Clustering and DBSCAN.
+* Build interactive dashboards using Power BI or Tableau.
+* Deploy clustering results using Streamlit.
+
+---
+
+# 📁 Repository Structure
+
+```bash
+K-Means-project-
+│
+├── Images/
+│   ├── 01_airlines_scatter_plot.png
+│   ├── 02_elbow_method_red.png
+│   ├── 03_inertia_curve.png
+│   └── 04_elbow_method_optimal_k.png
+│
+├── notebook.ipynb
+├── dataset.csv
+└── README.md
+```
+
+---
+
+# 🎯 Conclusion
+
+This project successfully demonstrates how **K-Means Clustering** can be used to analyze airline operational behavior and group airlines into meaningful clusters.
+
+The project also highlights:
+
+* Data preprocessing
+* Cluster optimization
+* Visualization techniques
+* Business-oriented insights
+
+---
+
+# 👨‍💻 Author
+
+**Lucky Singh**
+Aspiring Data Scientist | Machine Learning Enthusiast
